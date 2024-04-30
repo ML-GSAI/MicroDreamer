@@ -1,8 +1,11 @@
 # MicroDreamer
 Official implementation of "MicroDreamer: Zero-shot 3D Generation in ~20 Seconds by Score-based Iterative Reconstruction".
 
-## Installation
+<p align="center">
+<img alt="threestudio" src="https://github.com/ML-GSAI/MicroDreamer/examples.gif" width="100%">
+</p>
 
+## Installation
 
 The codebase is built on [DreamGaussian](https://github.com/dreamgaussian/dreamgaussian). For installation, 
 ```bash
