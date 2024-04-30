@@ -1,9 +1,9 @@
 # MicroDreamer
 Official implementation of "MicroDreamer: Zero-shot 3D Generation in ~20 Seconds by Score-based Iterative Reconstruction".
 
-<p align="center">
-<video src="https://github.com/ML-GSAI/MicroDreamer/blob/main/examples.mp4" width="100%">
-</p>
+
+https://github.com/ML-GSAI/MicroDreamer/assets/91880347/6109542c-4b13-4afb-ae10-87e646efe187
+
 
 ## Installation
 
