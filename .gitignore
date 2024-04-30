@@ -1,0 +1,12 @@
+__pycache__/
+build/
+*.egg-info/
+*.so
+venv_*/
+.vs/
+.vscode/
+.idea/
+
+
+logs*
+*.mp4

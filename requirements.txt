@@ -1,0 +1,34 @@
+tqdm
+rich
+ninja
+numpy
+pandas
+scipy
+scikit-learn
+matplotlib
+opencv-python
+imageio==2.33.1
+imageio-ffmpeg
+omegaconf
+
+torch==2.0.1
+torchvision==0.15.2
+xformers==0.0.22
+einops
+plyfile
+pygltflib
+
+
+# for stable-diffusion
+huggingface_hub
+diffusers==0.25.0
+accelerate
+transformers
+
+# for dmtet and mesh export
+xatlas
+trimesh
+PyMCubes
+pymeshlab
+
+rembg[gpu,cli]
