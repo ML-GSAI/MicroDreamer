@@ -1,5 +1,5 @@
 # MicroDreamer
-Official implementation of "MicroDreamer: Zero-shot 3D Generation in ~20 Seconds by Score-based Iterative Reconstruction".
+Official implementation of *[MicroDreamer: Zero-shot 3D Generation in ~20 Seconds by Score-based Iterative Reconstruction](http://arxiv.org/abs/2404.19525)*.
 
 
 
