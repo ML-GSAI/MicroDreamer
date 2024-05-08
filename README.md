@@ -20,17 +20,29 @@ pip install -r requirements.txt
 git clone --recursive https://github.com/ashawkey/diff-gaussian-rasterization
 pip install ./diff-gaussian-rasterization
 
+# The commit hash we used
+# d986da0d4cf2dfeb43b9a379b6e9fa0a7f3f7eea
+
 # simple-knn
 pip install ./simple-knn
 
 # nvdiffrast
 pip install git+https://github.com/NVlabs/nvdiffrast/
 
+# The version we used
+# pip install git+https://github.com/NVlabs/nvdiffrast/@0.3.1
+
 # kiuikit
-pip install git+https://github.com/ashawkey/kiuikit
+pip install git+https://github.com/ashawkey/kiuikit/
+
+# The version we used
+# pip install git+https://github.com/ashawkey/kiuikit/@0.2.3
 
 # To use ImageDream, also install:
 pip install git+https://github.com/bytedance/ImageDream/#subdirectory=extern/ImageDream
+
+# The commit hash we used
+# 26c3972e586f0c8d2f6c6b297aa9d792d06abebb
 ```
 
 ## Usage
