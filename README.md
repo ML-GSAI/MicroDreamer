@@ -86,3 +86,11 @@ This work is built on many amazing open source projects, thanks to all the autho
 
 ## BibTeX
 
+```
+@article{chen2024microdreamer,
+  title={MicroDreamer: Zero-shot 3D Generation in $$\backslash$sim $20 Seconds by Score-based Iterative Reconstruction},
+  author={Chen, Luxi and Wang, Zhengyi and Li, Chongxuan and Gao, Tingting and Su, Hang and Zhu, Jun},
+  journal={arXiv preprint arXiv:2404.19525},
+  year={2024}
+}
+```
