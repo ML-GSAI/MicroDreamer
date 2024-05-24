@@ -76,6 +76,12 @@ Image+Text-to-3D (ImageDream):
 python main.py --config configs/imagedream.yaml input=test_data/ghost_rgba.png prompt="a ghost eating hamburger" save_path=ghost
 ```
 
+## More Results
+
+
+https://github.com/ML-GSAI/MicroDreamer/assets/40787266/9f8917a7-da99-49cc-b89e-3ef646fb3316
+
+
 ## Acknowledgement
 
 This work is built on many amazing open source projects, thanks to all the authors!
