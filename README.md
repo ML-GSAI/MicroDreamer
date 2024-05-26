@@ -78,9 +78,7 @@ python main.py --config configs/imagedream.yaml input=test_data/ghost_rgba.png p
 
 ## More Results
 
-
-https://github.com/ML-GSAI/MicroDreamer/assets/40787266/9f8917a7-da99-49cc-b89e-3ef646fb3316
-
+https://github.com/ML-GSAI/MicroDreamer/assets/91880347/422db3e0-a4b5-44d0-9135-787ebc2c5c99
 
 ## Acknowledgement
 
