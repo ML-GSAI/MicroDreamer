@@ -9,3 +9,6 @@ venv_*/
 
 
 logs*
+
+testing.py
+test_dirs/

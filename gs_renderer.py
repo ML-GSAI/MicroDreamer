@@ -510,6 +510,20 @@ class GaussianModel:
         self.denom = self.denom[valid_points_mask]
         self.max_radii2D = self.max_radii2D[valid_points_mask]
 
+
+    def prune_points_test(self, mask):
+        mask = ~mask
+        self._xyz = self._xyz[mask].detach()
+        self._features_dc = self._features_dc[mask].detach()
+        self._features_rest = self._features_rest[mask].detach()
+        self._opacity = self._opacity[mask].detach()
+        self._scaling = self._scaling[mask].detach()
+        self._rotation = self._rotation[mask].detach()
+
+        self.xyz_gradient_accum = self.xyz_gradient_accum[mask].detach()
+        self.denom = self.denom[mask].detach()
+        self.max_radii2D = self.max_radii2D[mask].detach()
+
     def cat_tensors_to_optimizer(self, tensors_dict):
         optimizable_tensors = {}
         for group in self.optimizer.param_groups:

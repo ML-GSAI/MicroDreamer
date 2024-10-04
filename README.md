@@ -6,6 +6,9 @@ Official implementation of *[MicroDreamer: Zero-shot 3D Generation in ~20 Second
 https://github.com/ML-GSAI/MicroDreamer/assets/91880347/8b5661f5-3100-4da7-b1c4-7fd7f69aba4e
 
 
+## News
+[10/2024] Add a new mesh export method from [LGM](https://github.com/3DTopia/LGM)
+
 
 ## Installation
 
@@ -61,7 +64,7 @@ python process.py test_data/name.jpg --size 512
 python process.py test_data
 
 ### training gaussian stage
-# train 30 iters and export ckpt & coarse_mesh to logs
+# train 20 iters and export ckpt & coarse_mesh to logs
 python main.py --config configs/image_sai.yaml input=test_data/name_rgba.png save_path=name
 
 ### training mesh stage
@@ -85,16 +88,20 @@ https://github.com/ML-GSAI/MicroDreamer/assets/91880347/422db3e0-a4b5-44d0-9135-
 This work is built on many amazing open source projects, thanks to all the authors!
 
 - [DreamGaussian](https://github.com/dreamgaussian/dreamgaussian)
+- [LGM](https://github.com/3DTopia/LGM)
 - [threestudio](https://github.com/threestudio-project/threestudio)
 
 
 ## BibTeX
 
 ```
-@article{chen2024microdreamer,
-  title={MicroDreamer: Zero-shot 3D Generation in $$\backslash$sim $20 Seconds by Score-based Iterative Reconstruction},
-  author={Chen, Luxi and Wang, Zhengyi and Li, Chongxuan and Gao, Tingting and Su, Hang and Zhu, Jun},
-  journal={arXiv preprint arXiv:2404.19525},
-  year={2024}
+@misc{chen2024microdreamerzeroshot3dgeneration,
+      title={MicroDreamer: Zero-shot 3D Generation in $\sim$20 Seconds by Score-based Iterative Reconstruction}, 
+      author={Luxi Chen and Zhengyi Wang and Zihan Zhou and Tingting Gao and Hang Su and Jun Zhu and Chongxuan Li},
+      year={2024},
+      eprint={2404.19525},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2404.19525}, 
 }
 ```

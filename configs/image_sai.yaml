@@ -37,7 +37,7 @@ iters: 500
 # whether to linearly anneal timestep
 anneal_timestep: True
 # training iterations for stage 2
-iters_refine: 3
+iters_refine: 1
 # training camera radius
 radius: 2
 # training camera fovy
@@ -87,7 +87,7 @@ texture_lr: 0.2
 ### addtional
 denoise_steps: 20
 total_steps: 21
-t_start: 0.8
+t_start: 0.9
 t_end: 0.2
 steps_max: 15
 steps_min: 15

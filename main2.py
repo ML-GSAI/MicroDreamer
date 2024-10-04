@@ -162,34 +162,20 @@ class GUI:
             step_ratio = min(1, self.step / self.opt.iters_refine)
 
             loss = 0
-
-            ### known view
-            if self.input_img_torch is not None and not self.opt.imagedream:
-
-                ssaa = min(2.0, max(0.125, 2 * np.random.random()))
-                out = self.renderer.render(*self.fixed_cam, self.opt.ref_size, self.opt.ref_size, ssaa=ssaa)
-
-                # rgb loss
-                image = out["image"] # [H, W, 3] in [0, 1]
-                valid_mask = ((out["alpha"] > 0) & (out["viewcos"] > 0.5)).detach()
-                loss = loss + F.mse_loss(image * valid_mask, self.input_img_torch_channel_last * valid_mask)
-
             ### novel view (manual batch)
             render_resolution = 512
             images = []
             poses = []
             vers, hors, radii = [], [], []
-            # avoid too large elevation (> 80 or < -80), and make sure it always cover [min_ver, max_ver]
-            min_ver = max(min(self.opt.min_ver, self.opt.min_ver - self.opt.elevation), -80 - self.opt.elevation)
-            max_ver = min(max(self.opt.max_ver, self.opt.max_ver - self.opt.elevation), 80 - self.opt.elevation)
 
             cur_cams = []
 
             hor_base=np.random.randint(-180, -180+360//batch_size)
+            
             for i in range(batch_size):
-
                 # render random view
-                ver = np.random.randint(min_ver, max_ver)
+                # ver = np.random.randint(min_ver, max_ver)
+                ver = -self.opt.elevation
                 hor = np.random.randint(-180, 180)
                 hor = hor_base+(360//batch_size)*i
                 radius = 0
@@ -200,19 +186,8 @@ class GUI:
 
                 pose = orbit_camera(self.opt.elevation + ver, hor, self.opt.radius + radius)
                 poses.append(pose)
+                cur_cams.append(pose)
 
-                # random render resolution
-                ssaa = min(2.0, max(0.125, 2 * np.random.random()))
-                out = self.renderer.render(pose, self.cam.perspective, render_resolution, render_resolution, ssaa=ssaa)
-                cur_cams.append((pose,ssaa))
-
-                image = out["image"] # [H, W, 3] in [0, 1]
-                image = image.permute(2,0,1).contiguous().unsqueeze(0) # [1, 3, H, W] in [0, 1]
-
-                images.append(image)
-
-
-            images = torch.cat(images, dim=0)
             poses = torch.from_numpy(np.stack(poses, axis=0)).to(self.device)
 
             # import kiui
@@ -220,36 +195,34 @@ class GUI:
             # kiui.vis.plot_image(image)
 
             # guidance loss
-            recon_steps = 15
+            recon_steps = 30
             strength = 0.8
 
             for _1 in range(recon_steps):
-
-                if _1>=1:
-                    # self.step += 1
-                    loss = 0.0
-                    ### known view
-                    if self.input_img_torch is not None and not self.opt.imagedream:
-                        ssaa = min(2.0, max(0.125, 2 * np.random.random()))
-                        out = self.renderer.render(*self.fixed_cam, self.opt.ref_size, self.opt.ref_size, ssaa=ssaa)
-
-                        # rgb loss
-                        image = out["image"] # [H, W, 3] in [0, 1]
-                        valid_mask = ((out["alpha"] > 0) & (out["viewcos"] > 0.5)).detach()
-                        loss = loss + F.mse_loss(image * valid_mask, self.input_img_torch_channel_last * valid_mask)
+                loss = 0.0
+                ### known view
+                if self.input_img_torch is not None and not self.opt.imagedream:
+                    out = self.renderer.render(*self.fixed_cam, self.opt.ref_size, self.opt.ref_size)
+                    # rgb loss
+                    image = out["image"] # [H, W, 3] in [0, 1]
+                    valid_mask = ((out["alpha"] > 0) & (out["viewcos"] > 0.5)).detach()
+                    loss = loss + F.mse_loss(image * valid_mask, self.input_img_torch_channel_last * valid_mask)
+                
+                images=[]
+                
+                for pose in cur_cams:
+                    out = self.renderer.render(pose, self.cam.perspective, render_resolution, render_resolution)
+                    image=out["image"].permute(2,0,1).contiguous().unsqueeze(0)
+                    images.append(image)
                     
-                    images=[]
-                    
-                    for pose,ssaa in cur_cams:
-                        out = self.renderer.render(pose, self.cam.perspective, render_resolution, render_resolution, ssaa=ssaa)
-                        image=out["image"].permute(2,0,1).contiguous().unsqueeze(0)
-                        images.append(image)
-                    images=torch.cat(images,dim=0)
+                images=torch.cat(images,dim=0)
+                
                 if self.opt.mvdream or self.opt.imagedream:
                     # loss = loss + self.opt.lambda_sd * self.guidance_sd.train_step(images, poses, step_ratio)
                     refined_images = self.guidance_sd.refine(images, poses, strength=strength).float()
                     refined_images = F.interpolate(refined_images, (render_resolution, render_resolution), mode="bilinear", align_corners=False)
                     loss = loss + self.opt.lambda_sd * F.mse_loss(images, refined_images)
+                    
                 if self.enable_zero123:
                     # loss = loss + self.opt.lambda_zero123 * self.guidance_zero123.train_step(images, vers, hors, radii, step_ratio)
                     if refined_images is None:
@@ -434,7 +407,7 @@ if __name__ == "__main__":
 
     # auto find mesh from stage 1
     if opt.mesh is None:
-        default_path = os.path.join(opt.outdir, opt.save_path + '_mesh.' + opt.mesh_format)
+        default_path = os.path.join(opt.outdir, opt.save_path + '_model.' + opt.mesh_format)
         if os.path.exists(default_path):
             opt.mesh = default_path
         else:
@@ -446,4 +419,6 @@ if __name__ == "__main__":
         gui.render()
     else:
         gui.train(opt.iters_refine)
-    gui.save_video(f'./{opt.save_path}-refine-video.mp4')
+    # gui.save_video(f'./{opt.save_path}-refine-video.mp4')
+    gui.save_image(f'./test_dirs/work_dirs2/{opt.save_path}',num=8)
+    gui.save_video(f'./test_dirs/work_dirs2/{opt.save_path}/video.mp4')
