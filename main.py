@@ -332,7 +332,8 @@ class GUI:
                 if self.enable_zero123:
                     target_img=self.guidance_zero123.train_step(images, vers, hors, radii, step_ratio=None, default_elevation=self.opt.elevation,guidance_scale=self.opt.cfg,target_img=target_img,step=step_t,init_3d=self.init_3d,iter_steps=self.denoise_steps,inverse_ratio=self.opt.inv_r,ddim_eta=self.opt.eta)
                     
-                    loss_my = F.l1_loss(images, target_img.to(images), reduction='sum')/images.shape[0] + torch.prod(torch.tensor(images.shape[1:]))*(1-ssim(images,target_img.to(images)))
+                    loss_my = F.l1_loss(images, target_img.to(images), reduction='sum')/images.shape[0]
+                    # + torch.prod(torch.tensor(images.shape[1:]))*(1-ssim(images,target_img.to(images)))
                     
                     loss = loss + self.opt.lambda_zero123 * loss_my
             
