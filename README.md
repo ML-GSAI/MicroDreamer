@@ -3,7 +3,9 @@ Official implementation of *[MicroDreamer: Zero-shot 3D Generation in ~20 Second
 
 
 
-https://github.com/ML-GSAI/MicroDreamer/assets/91880347/8b5661f5-3100-4da7-b1c4-7fd7f69aba4e
+
+https://github.com/user-attachments/assets/0a99424a-2e7a-47f0-9f0a-b6713b7686b5
+
 
 
 ## News
@@ -81,7 +83,18 @@ python main.py --config configs/imagedream.yaml input=test_data/ghost_rgba.png p
 
 ## More Results
 
-https://github.com/ML-GSAI/MicroDreamer/assets/91880347/422db3e0-a4b5-44d0-9135-787ebc2c5c99
+
+
+https://github.com/user-attachments/assets/8888a353-df16-4e19-ac1b-7ee37ece7ed1
+
+
+
+
+https://github.com/user-attachments/assets/7e52a87b-d1f6-4e7b-a6b4-7732ea69613c
+
+
+
+
 
 ## Acknowledgement
 
