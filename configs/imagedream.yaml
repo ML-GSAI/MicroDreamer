@@ -94,7 +94,7 @@ steps_schedule: 'cosine_up'
 cfg: 2.0
 # ref_loss: 0.3
 # ref_mask_loss: 0.001
-inv_r: 1.0
+inv_r: 0.6
 eta: 0.0
 batch_size_max: 4
 batch_size_min: 4

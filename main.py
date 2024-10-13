@@ -326,7 +326,8 @@ class GUI:
 
                 if self.enable_sd:
                     if self.opt.mvdream or self.opt.imagedream:
-                        loss_my, target_img = self.guidance_sd.train_step(images, poses, step_ratio=None,guidance_scale=self.opt.cfg,target_img=target_img,step=step_t,init_3d=self.init_3d,iter_steps=self.denoise_steps)
+                        target_img = self.guidance_sd.train_step(images, poses, step_ratio=None,guidance_scale=self.opt.cfg,target_img=target_img,step=step_t,init_3d=self.init_3d,iter_steps=self.denoise_steps)
+                        loss_my = F.l1_loss(images, target_img.to(images), reduction='sum')/images.shape[0]
                         loss = loss + self.opt.lambda_sd * loss_my
 
                 if self.enable_zero123:

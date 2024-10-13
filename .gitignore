@@ -12,3 +12,4 @@ logs*
 
 testing.py
 test_dirs/
+tmp/

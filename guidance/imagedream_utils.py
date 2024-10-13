@@ -256,10 +256,11 @@ class ImageDream(nn.Module):
                 pred_latents = latents_noisy
                 target_img=self.decode_latents(pred_latents)
 
-        real_target_img=F.interpolate(target_img, (pred_rgb.shape[-2], pred_rgb.shape[-1]), mode='bicubic', align_corners=False)
-        loss=F.l1_loss(pred_rgb,real_target_img.to(pred_rgb),reduction='sum')/pred_rgb.shape[0]
+        # real_target_img=F.interpolate(target_img, (pred_rgb.shape[-2], pred_rgb.shape[-1]), mode='bicubic', align_corners=False)
+        # loss=F.l1_loss(pred_rgb,real_target_img.to(pred_rgb),reduction='sum')/pred_rgb.shape[0]
 
-        return loss,target_img
+        # return loss,target_img
+        return target_img
 
     def decode_latents(self, latents):
         imgs = self.model.decode_first_stage(latents)

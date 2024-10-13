@@ -67,18 +67,23 @@ python process.py test_data
 
 ### training gaussian stage
 # train 20 iters and export ckpt & coarse_mesh to logs
-python main.py --config configs/image_sai.yaml input=test_data/name_rgba.png save_path=name
+python main.py --config configs/image_sai.yaml input=test_data/name_rgba.png save_path=name_rgba
 
 ### training mesh stage
 # auto load coarse_mesh and refine 3 iters, export fine_mesh to logs
-python main2.py --config configs/image_sai.yaml input=test_data/name_rgba.png save_path=name
+python main2.py --config configs/image_sai.yaml input=test_data/name_rgba.png save_path=name_rgba
 ```
 
 Image+Text-to-3D (ImageDream):
 
 ```bash
 ### training gaussian stage
-python main.py --config configs/imagedream.yaml input=test_data/ghost_rgba.png prompt="a ghost eating hamburger" save_path=ghost
+python main.py --config configs/imagedream.yaml input=test_data/ghost_rgba.png prompt="a ghost eating hamburger" save_path=ghost_rgba
+```
+
+Calculate for CLIP similarity:
+```bash
+PYTHONPATH='.' python scripts/cal_sim.py
 ```
 
 ## More Results
